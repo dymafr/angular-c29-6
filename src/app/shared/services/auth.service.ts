@@ -16,19 +16,9 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public fetchCurrentUser(): Observable<User> {
-    return this.http
-      .get<User>('https://dyma-staging.fr:5001/api/auth/currentuser')
-      .pipe(
-        tap((user: User) => {
-          console.log(user);
-          this.user$.next(user);
-          if (user) {
-            this.isLoggedin$.next(true);
-          } else {
-            this.isLoggedin$.next(false);
-          }
-        })
-      );
+    return this.http.get<User>(
+      'https://dyma-staging.fr:5001/api/auth/currentuser'
+    );
   }
 
   public inscription(user: User): Observable<any> {
@@ -36,28 +26,13 @@ export class AuthService {
   }
 
   public connexion(credentials: Credentials): Observable<User> {
-    return this.http
-      .post<User>(
-        'https://dyma-staging.fr:5001/api/auth/connexion',
-        credentials
-      )
-      .pipe(
-        tap((user: User) => {
-          if (user) {
-            this.user$.next(user);
-            this.isLoggedin$.next(true);
-          }
-        })
-      );
+    return this.http.post<User>(
+      'https://dyma-staging.fr:5001/api/auth/connexion',
+      credentials
+    );
   }
 
   public logout(): Observable<any> {
-    return this.http
-      .delete('https://dyma-staging.fr:5001/api/auth/logout')
-      .pipe(
-        tap(() => {
-          this.user$.next(null);
-        })
-      );
+    return this.http.delete('https://dyma-staging.fr:5001/api/auth/logout');
   }
 }
