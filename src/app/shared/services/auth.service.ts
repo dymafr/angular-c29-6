@@ -1,17 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Credentials, User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public isLoggedin$: ReplaySubject<boolean> = new ReplaySubject(1);
-  public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(
-    null
-  );
-
   constructor(private http: HttpClient) {}
 
   public fetchCurrentUser(): Observable<User> {
