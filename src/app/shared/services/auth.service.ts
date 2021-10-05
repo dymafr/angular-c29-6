@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { Credentials, User } from '../interfaces/user.interface';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
